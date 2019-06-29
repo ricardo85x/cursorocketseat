@@ -24,6 +24,31 @@ class NotificationController {
 
     return res.json(notifications);
   }
+
+  async update(req, res) {
+    // const notification = await Notification.find({
+    //   user: req.userID,
+
+    // })
+
+    console.log('id usuario: ', req.params.id);
+    const notification = await Notification.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        user: req.userID,
+      },
+      { read: true },
+      { new: true } // retorna o item alterado
+    );
+
+    if (!notification) {
+      return res.status(400).json({
+        error: 'notificacao nao encontrada para seu usuario',
+      });
+    }
+
+    return res.json(notification);
+  }
 }
 
 export default new NotificationController();
