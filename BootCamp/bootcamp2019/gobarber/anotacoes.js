@@ -18,6 +18,9 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
         'yarn sequelize migrate:undo', // desmerdify a ultima
         'yarn sequelize migrate:undo:all', // desmerdify tudo
       ],
+      dicas: [
+        relacionamento: 'quando se tem mais de 1 relacionamento devemos colocar "as" no belongsTo '
+      ]
     },
     {
       nome: 'bcryptjs',
