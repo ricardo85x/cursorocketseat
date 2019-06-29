@@ -3,8 +3,36 @@ import { startOfHour, parseISO, isBefore, endOfHour } from 'date-fns';
 import { Op } from 'sequelize';
 import Appointment from '../models/Appointment';
 import User from '../models/Users';
+import File from '../models/File';
 
 class AppointmentController {
+  async index(req, res) {
+    const appointments = await Appointment.findAll({
+      where: {
+        user_id: req.userID,
+        canceled_at: null,
+      },
+      order: ['date'],
+      attributes: ['id', 'date'],
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['name', 'email', 'id'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['url', 'name', 'id', 'path'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json(appointments);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       date: Yup.date().required(),
@@ -70,7 +98,7 @@ class AppointmentController {
     }
 
     const appointment = await Appointment.create({
-      user_id: req.userId,
+      user_id: req.userID,
       provider_id,
       date,
     });
