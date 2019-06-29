@@ -10,6 +10,7 @@ import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
 // import Appointment from './app/models/Appointment';
 import AppointmentController from './app/controllers/AppointmentController';
+import SchedureController from './app/controllers/ScheduleController';
 
 const routes = new Router();
 
@@ -28,5 +29,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 routes.post('/appointments', AppointmentController.store);
 routes.get('/appointments', AppointmentController.index);
+
+routes.get('/schedules', SchedureController.index);
 
 export default routes;
