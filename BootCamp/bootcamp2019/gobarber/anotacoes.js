@@ -1,4 +1,4 @@
-export default { erro
+export default { erro // adicionado este erro para o vscode deixar o arquivo vermelho e ser mais facil achar :P
   modules: [
     {
       nome: 'sucrase',
@@ -31,6 +31,10 @@ export default { erro
       nome: 'yup',
       desc: 'validacao de campos ',
     },
+    {
+      nome: "multer",
+      desc: "modulo para tratar multform-data para upload de imagens e afins"
+    }
   ],
   docker: [
     {
