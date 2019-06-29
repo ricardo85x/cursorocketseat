@@ -37,17 +37,32 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
     {
       nome: "multer",
       desc: "modulo para tratar multform-data para upload de imagens e afins"
+    },
+    {
+      nome: "date-fns",
+      desc: "para tratar datas",
+      obs: "para instalar a ultima adicione @next ex: yarn install data-fns@next"
     }
   ],
   docker: [
     {
-      banco_postgres: {
-        criar:
-          'docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres',
-        obs:
-          'na porta:porta a primeira é a porque que vc vai acessar local e a segunda é a porta real',
-        link: 'https://hub.docker.com/_/postgres',
-      },
+      banco: [
+        {
+          banco_postgres: {
+            criar:
+              'docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres',
+            obs:
+              'na porta:porta a primeira é a porque que vc vai acessar local e a segunda é a porta real',
+            link: 'https://hub.docker.com/_/postgres',
+          }
+        },
+        {
+          banco_mongo: {
+            criar: 'docker run --name mongobarber -p 27017:27017 -d -t mongo'
+          }
+        }
+
+      ]
     },
     {
       dicas: {
