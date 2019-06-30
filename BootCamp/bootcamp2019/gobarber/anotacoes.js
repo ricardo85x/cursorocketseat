@@ -46,6 +46,9 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
     {
       nome: "mongoose",
       desc: "para trabalhar com o mongo db no node"
+    }, {
+      nome: "nodemailer",
+      desc: "envio de emails..."
     }
   ],
   docker: [
@@ -93,6 +96,16 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
       ],
     },
   ],
+  servicos: [{
+    email: [
+      {
+        nome: "mailtrap",
+        url: "mailtrap.io",
+        desc: "envios de email for free para ambiente dev",
+        desc2: "o email vai chegar apenas no mailtrap e nao no destinatario real"
+      }
+    ]
+  }],
   beautify: [
     {
       eslint: [

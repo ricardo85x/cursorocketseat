@@ -2,3 +2,6 @@ node_modules/
 temp/uploads/*
 .reify-cache/
 yarn.lock
+yarn-error.log
+src/config/mail.js
+
