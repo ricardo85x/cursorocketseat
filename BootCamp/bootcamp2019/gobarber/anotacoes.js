@@ -62,6 +62,14 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
       nome: 'bee-queue',
       desc: 'gerenciamento de filas, exemplo: manda enviar email, e se falhou(smtp offline) tenta novamente em x minutos',
       desc2: 'existe outros com mais opcoes(prioridade por exemplo) mas o bee-queue é mais rapido por ser leve'
+    },
+    {
+      nome: 'express-async-errors',
+      desc: 'por padrao o express nao reporta os erros nos methodos async, este modulo ativa isto'
+    },
+    {
+      nome: 'youch',
+      desc: 'faz uma tratativa das msg de erro para ser mais facil debugar'
     }
   ],
   docker: [
@@ -115,6 +123,15 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
         },
       ],
     },
+    {
+      errors: [{
+        nome: 'sentry',
+        desc: 'ferramenta para monitoramento de erros,',
+        desc2: 'uma possibilidade é criar um issue no github e depois podemos repassar para algum arrumar o bug',
+        url: 'sentry.io',
+
+      }]
+    }
   ],
   servicos: [{
     email: [
