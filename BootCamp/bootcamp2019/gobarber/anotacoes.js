@@ -70,6 +70,10 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
     {
       nome: 'youch',
       desc: 'faz uma tratativa das msg de erro para ser mais facil debugar'
+    },
+    {
+      nome: 'dotenv',
+      desc: 'ler variaveis de ambiente do arquivo .env'
     }
   ],
   docker: [

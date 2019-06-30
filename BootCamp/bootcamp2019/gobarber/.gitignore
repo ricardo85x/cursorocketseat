@@ -4,4 +4,4 @@ temp/uploads/*
 yarn.lock
 yarn-error.log
 src/config/mail.js
-
+.env

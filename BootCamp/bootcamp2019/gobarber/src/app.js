@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express'; // usando import com ajuda do
 import 'express-async-errors';
 import Youch from 'youch';
@@ -36,9 +37,12 @@ class App {
   exceptionHandlerr() {
     // quando o middleware tem 4 argumento indica um middlere de exception sendo o primeiro o erro
     this.server.use(async (err, req, res, next) => {
-      const errors = await new Youch(err, req).toJSON();
+      if (process.env.NODE_ENV === 'development') {
+        const errors = await new Youch(err, req).toJSON();
 
-      return res.status(500).json(errors);
+        return res.status(500).json(errors);
+      }
+      return res.status(500).json({ error: 'Internal Server Error' });
     });
   }
 }
