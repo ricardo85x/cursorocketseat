@@ -11,6 +11,7 @@ export default {
   },
 };
 
+/* rename this file to mail.js */
 /*
  Providers:
   Amazon SES
