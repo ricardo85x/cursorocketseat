@@ -1,5 +1,12 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore, endOfHour, format } from 'date-fns';
+import {
+  startOfHour,
+  parseISO,
+  isBefore,
+  endOfHour,
+  format,
+  subHours,
+} from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
 import { Op } from 'sequelize';
 import Appointment from '../models/Appointment';
@@ -10,6 +17,13 @@ import Notification from '../schemas/notification';
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
+
+    const teste = await Appointment.findAll({
+      where: {
+        user_id: req.userID,
+        canceled_at: null,
+      },
+    });
 
     const appointments = await Appointment.findAll({
       where: {
@@ -133,6 +147,33 @@ class AppointmentController {
       content: `Novo agendamento de ${user.name} para o ${formattedDate}`,
       user: provider_id,
     });
+
+    return res.json(appointment);
+  }
+
+  async delete(req, res) {
+    const appointment = await Appointment.findByPk(req.params.id);
+
+    if (!appointment) {
+      return res.status(400).json({ error: 'appointment not found' });
+    }
+
+    if (appointment.user_id !== req.userID) {
+      return res
+        .status(401)
+        .json({ error: 'appointment not found for this user' });
+    }
+
+    const dateWithSub = subHours(appointment.date, 2); // menos 2 horas
+
+    if (isBefore(dateWithSub, new Date())) {
+      return res.status(401).json({
+        error: 'you can only delete appointment that will begin after 2 hours',
+      });
+    }
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
 
     return res.json(appointment);
   }

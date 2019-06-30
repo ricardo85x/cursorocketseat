@@ -42,6 +42,10 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
       nome: "date-fns",
       desc: "para tratar datas",
       obs: "para instalar a ultima adicione @next ex: yarn install data-fns@next"
+    },
+    {
+      nome: "mongoose",
+      desc: "para trabalhar com o mongo db no node"
     }
   ],
   docker: [
