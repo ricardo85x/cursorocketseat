@@ -49,6 +49,14 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
     }, {
       nome: "nodemailer",
       desc: "envio de emails..."
+    },
+    {
+      nome: "express-handlebars",
+      desc: "possibilita criação de template html"
+    },
+    {
+      nome: "nodemailer-express-handlebars",
+      desc: "integração do nodemailer com o handlebars"
     }
   ],
   docker: [
