@@ -57,6 +57,11 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
     {
       nome: "nodemailer-express-handlebars",
       desc: "integração do nodemailer com o handlebars"
+    },
+    {
+      nome: 'bee-queue',
+      desc: 'gerenciamento de filas, exemplo: manda enviar email, e se falhou(smtp offline) tenta novamente em x minutos',
+      desc2: 'existe outros com mais opcoes(prioridade por exemplo) mas o bee-queue é mais rapido por ser leve'
     }
   ],
   docker: [
@@ -74,6 +79,13 @@ export default { erro // adicionado este erro para o vscode deixar o arquivo ver
         {
           banco_mongo: {
             criar: 'docker run --name mongobarber -p 27017:27017 -d -t mongo'
+          }
+        },
+        {
+          banco_redis: {
+            criar: 'docker run --name redisbarber -p 6379:6379 -d -t redis:alpine',
+            obs: 'banco de chave/valor muiiito rapido, porem nao oferece template como o mongo',
+            obs2: 'alpine indica só com as features mais essenciais, assim fica mais leve '
           }
         }
 
