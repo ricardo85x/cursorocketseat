@@ -10,7 +10,7 @@ class CancellationMail {
   async handle({ data }) {
     console.log('a fila executou!', data);
     const { appointment } = data;
-    await Mail.sendMail({
+    await Mail.sendMail2({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,
       subject: 'Agendamento cancelado',
       template: 'cancellation',
