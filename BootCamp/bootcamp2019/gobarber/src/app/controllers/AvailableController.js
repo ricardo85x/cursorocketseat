@@ -50,9 +50,6 @@ class AvailableController {
         0
       );
 
-      appointment.find(a => {
-        console.log('hora: ', format(setMinutes(a.date, 0), 'HH:mm'));
-      });
       return {
         time,
         value: format(value, "yyyy-MM-dd'T'HH:mm:ssxxx "),
