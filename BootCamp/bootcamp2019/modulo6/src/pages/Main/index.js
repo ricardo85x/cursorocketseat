@@ -6,11 +6,11 @@ import { View, Text } from 'react-native';
 export default function Main() {
     return (
         <View>
-            <Text>Ola Main</Text>
+            <Text>Ola Main volta 2</Text>
         </View>
     );
 }
 
-Main.navigationsOptions = {
+Main.navigationOptions = {
     title: 'Usuarios',
 };
