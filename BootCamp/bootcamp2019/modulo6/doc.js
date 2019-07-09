@@ -36,6 +36,15 @@ const doc = [
                     },
                 ],
             },
+
+            {
+                nome: 'styled-components',
+                desc: 'configuração de css usando js',
+                limitacoes: [
+                    'nao é possivel usar encadeamento',
+                    'não é possivel usar estilo global, ja que nao existe classe id nem tag',
+                ],
+            },
         ],
     },
     {
