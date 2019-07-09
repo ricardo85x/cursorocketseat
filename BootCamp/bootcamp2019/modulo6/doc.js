@@ -45,6 +45,15 @@ const doc = [
                     'não é possivel usar estilo global, ja que nao existe classe id nem tag',
                 ],
             },
+            {
+                nome: 'react-native-vector-icons',
+                desc: 'biblioteca de icones',
+                outros: ['tem que rodar o react link e o jetfy'],
+            },
+            {
+                nome: 'axios',
+                desc: 'trabalhar com api ',
+            },
         ],
     },
     {
