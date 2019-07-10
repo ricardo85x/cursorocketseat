@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import { Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, Form, Input, SubmmitButton } from './styles';
+import {
+    Container,
+    Form,
+    Input,
+    SubmmitButton,
+    List,
+    Users,
+    Avatar,
+    Name,
+    Bio,
+    ProfileButton,
+    ProfileButtonText,
+} from './styles';
 
 import api from '../../services/api';
 
@@ -10,6 +22,7 @@ export default class Main extends Component {
     state = {
         newUser: '',
         users: [],
+        failedSearch: false,
     };
 
     //
@@ -17,29 +30,43 @@ export default class Main extends Component {
     handleAddUser = async () => {
         const { users, newUser } = this.state;
 
-        const response = await api.get(`/users/${newUser}`);
+        try {
+            const response = await api.get(`/users/${newUser}`);
 
-        const { name, login, avatar_url: avatar } = response;
-        if (name && login && avatar) {
-            const data = {
-                name,
-                login,
-                avatar,
-            };
+            if (response.data) {
+                const { name, login, bio, avatar_url: avatar } = response.data;
 
-            this.setState({ users: [...users, data], newUser: '' });
+                const data = {
+                    name,
+                    login,
+                    bio,
+                    avatar,
+                };
+
+                console.tron.log(data);
+                this.setState({
+                    users: [...users, data],
+                    newUser: '',
+                    failedSearch: false,
+                });
+            } else {
+                this.setState({ failedSearch: true });
+            }
+        } catch (_) {
+            this.setState({ failedSearch: true });
         }
 
         Keyboard.dismiss();
     };
 
     render() {
-        const { users, newUser } = this.state;
+        const { users, newUser, failedSearch } = this.state;
 
         return (
             <Container>
                 <Form>
                     <Input
+                        failedSearch={failedSearch}
                         autoCorrect={false}
                         autoCapitalize="none"
                         placeholder="Adicionar usuario"
@@ -52,6 +79,24 @@ export default class Main extends Component {
                         <Icon name="add" size={20} color="#FFF" />
                     </SubmmitButton>
                 </Form>
+
+                <List
+                    data={users}
+                    keyExtractor={user => user.login}
+                    renderItem={({ item }) => (
+                        <Users>
+                            <Avatar source={{ uri: item.avatar }} />
+                            <Name>{item.name}</Name>
+                            <Bio>{item.bio} </Bio>
+
+                            <ProfileButton onPress={() => {}}>
+                                <ProfileButtonText>
+                                    Ver perfil
+                                </ProfileButtonText>
+                            </ProfileButton>
+                        </Users>
+                    )}
+                />
             </Container>
         );
     }

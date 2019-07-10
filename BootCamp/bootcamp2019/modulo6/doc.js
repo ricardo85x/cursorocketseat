@@ -43,6 +43,7 @@ const doc = [
                 limitacoes: [
                     'nao é possivel usar encadeamento',
                     'não é possivel usar estilo global, ja que nao existe classe id nem tag',
+                    'não é possivel usar porcentagem',
                 ],
             },
             {
