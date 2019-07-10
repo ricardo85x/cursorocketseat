@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -21,6 +22,16 @@ import {
 import api from '../../services/api';
 
 export default class Main extends Component {
+    static navigationOptions = {
+        title: 'Usuarios',
+    };
+
+    static propTypes = {
+        navigation: PropTypes.shape({
+            navigate: PropTypes.func,
+        }).isRequired,
+    };
+
     state = {
         newUser: '',
         users: [],
@@ -82,6 +93,12 @@ export default class Main extends Component {
         Keyboard.dismiss();
     };
 
+    handleNavigate = user => {
+        const { navigation } = this.props; // metodo navigation sempre dentro do props quando usamos createStackNavigator
+
+        navigation.navigate('User', { user });
+    };
+
     render() {
         const { users, newUser, failedSearch, loading } = this.state;
 
@@ -119,7 +136,9 @@ export default class Main extends Component {
                             <Name>{item.name}</Name>
                             <Bio>{item.bio} </Bio>
 
-                            <ProfileButton onPress={() => {}}>
+                            <ProfileButton
+                                onPress={() => this.handleNavigate(item)}
+                            >
                                 <ProfileButtonText>
                                     Ver perfil
                                 </ProfileButtonText>
@@ -131,7 +150,3 @@ export default class Main extends Component {
         );
     }
 }
-
-Main.navigationOptions = {
-    title: 'Usuarios',
-};

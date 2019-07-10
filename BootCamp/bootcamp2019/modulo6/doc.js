@@ -61,6 +61,10 @@ const doc = [
                     'funciona como o localStorage que temos para o browser, mas no dispositivo',
                 outros: 'tem que fazer o link, jestify e o run-android/ios',
             },
+            {
+                nome: 'prop-types',
+                desc: 'fazer a validacao das propriedades',
+            },
         ],
     },
     {
