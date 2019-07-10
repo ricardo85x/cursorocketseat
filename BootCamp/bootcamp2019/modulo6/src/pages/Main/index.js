@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -23,11 +23,13 @@ export default class Main extends Component {
         newUser: '',
         users: [],
         failedSearch: false,
+        loading: false,
     };
 
     //
     //
     handleAddUser = async () => {
+        this.setState({ loading: true });
         const { users, newUser } = this.state;
 
         try {
@@ -56,11 +58,13 @@ export default class Main extends Component {
             this.setState({ failedSearch: true });
         }
 
+        this.setState({ loading: false });
+
         Keyboard.dismiss();
     };
 
     render() {
-        const { users, newUser, failedSearch } = this.state;
+        const { users, newUser, failedSearch, loading } = this.state;
 
         return (
             <Container>
@@ -75,8 +79,15 @@ export default class Main extends Component {
                         returnKeyType="send" // permite enviar ao clicar no enter
                         onSubmitEditing={this.handleAddUser} // roda uma acao ao envair com o enter
                     />
-                    <SubmmitButton onPress={this.handleAddUser}>
-                        <Icon name="add" size={20} color="#FFF" />
+                    <SubmmitButton
+                        loading={loading}
+                        onPress={this.handleAddUser}
+                    >
+                        {loading ? (
+                            <ActivityIndicator color="#FFF" />
+                        ) : (
+                            <Icon name="add" size={20} color="#FFF" />
+                        )}
                     </SubmmitButton>
                 </Form>
 

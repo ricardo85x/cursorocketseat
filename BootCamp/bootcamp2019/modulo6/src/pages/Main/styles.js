@@ -13,9 +13,9 @@ export const Form = styled.View`
     border-color: #eee;
 `;
 
-export const Input = styled.TextInput.attrs(props => ({
+export const Input = styled.TextInput.attrs({
     placeholderTextColor: '#999',
-}))`
+})`
     flex: 1;
     height: 40px;
     background: #eee;
@@ -36,6 +36,7 @@ export const SubmmitButton = styled(RectButton)`
     border-radius: 4px;
     margin-left: 10px;
     padding: 0 12px;
+    opacity: ${props => (props.loading ? 0.7 : 1)};
 `;
 
 export const List = styled.FlatList.attrs({
