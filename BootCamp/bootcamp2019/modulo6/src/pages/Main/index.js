@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {
     Container,
     Form,
@@ -25,6 +27,23 @@ export default class Main extends Component {
         failedSearch: false,
         loading: false,
     };
+
+    async componentDidMount() {
+        const users = await AsyncStorage.getItem('users');
+
+        if (users) {
+            this.setState({ users: JSON.parse(users) });
+        }
+    }
+
+    async componentDidUpdate(_, prev) {
+        // _ = props, prev = state
+
+        const { users } = this.state;
+        if (prev.users != users) {
+            AsyncStorage.setItem('users', JSON.stringify(users));
+        }
+    }
 
     //
     //

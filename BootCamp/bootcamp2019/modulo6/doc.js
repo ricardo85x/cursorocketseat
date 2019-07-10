@@ -55,6 +55,12 @@ const doc = [
                 nome: 'axios',
                 desc: 'trabalhar com api ',
             },
+            {
+                nome: '@react-native-community/async-storage',
+                desc:
+                    'funciona como o localStorage que temos para o browser, mas no dispositivo',
+                outros: 'tem que fazer o link, jestify e o run-android/ios',
+            },
         ],
     },
     {
