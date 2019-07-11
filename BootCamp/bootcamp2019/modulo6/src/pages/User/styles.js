@@ -40,7 +40,7 @@ export const Stars = styled.FlatList.attrs({
 })`
     margin-top: 20px;
 `;
-export const Stared = styled.View`
+export const Stared = styled.TouchableOpacity`
     background: #f5f5f5;
     border-radius: 4px;
     padding: 10px 15px;

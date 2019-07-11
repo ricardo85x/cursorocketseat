@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { View, Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import api from '../../services/api';
+
 import {
     Container,
     Header,
@@ -23,6 +24,9 @@ export default class User extends Component {
 
     state = {
         stars: [],
+        loading: true,
+        page: 0,
+        refreshing: false,
     };
 
     static propTypes = {
@@ -32,19 +36,60 @@ export default class User extends Component {
     };
 
     async componentDidMount() {
+        this.loadMore();
+    }
+
+    refreshList = async () => {
+        this.setState({ page: 0, stars: [] });
+
+        await this.loadMore(1);
+    };
+
+    handleStar = ({ item }) => {
+        console.tron.log(item.html_url);
+        const { navigation } = this.props;
+        navigation.navigate('GitPage', { uri: item.html_url });
+    };
+
+    loadMore = async (newPage = -1) => {
+        this.setState({
+            loading: true,
+        });
+
         const { navigation } = this.props;
         const user = navigation.getParam('user');
 
-        const response = await api.get(`/users/${user.login}/starred`);
+        let { page, stars } = this.state;
+
+        if (newPage === -1) {
+            page += 1;
+        } else {
+            page = newPage;
+        }
+        if (page === 1) {
+            stars = [];
+        }
+        const response = await api.get(`/users/${user.login}/starred`, {
+            params: {
+                per_page: 10,
+                page,
+            },
+        });
+
+        response.data.forEach(item => stars.push(item));
 
         console.tron.log(response.data);
 
-        this.setState({ stars: response.data });
-    }
+        this.setState({
+            stars,
+            loading: false,
+            page,
+        });
+    };
 
     render() {
         const { navigation } = this.props;
-        const { stars } = this.state;
+        const { stars, loading, refreshing } = this.state;
 
         console.tron.log(stars);
 
@@ -60,9 +105,13 @@ export default class User extends Component {
 
                 <Stars
                     data={stars}
+                    onEndReachedThreshold={0.2}
+                    onEndReached={this.loadMore}
+                    onRefresh={this.refreshList}
+                    refreshing={refreshing}
                     keyExtractor={star => String(star.id)}
                     renderItem={({ item }) => (
-                        <Stared>
+                        <Stared onPress={() => this.handleStar({ item })}>
                             <OwnerAvatar
                                 source={{ uri: item.owner.avatar_url }}
                             />
@@ -73,6 +122,7 @@ export default class User extends Component {
                         </Stared>
                     )}
                 />
+                {loading && <ActivityIndicator />}
             </Container>
         );
     }
