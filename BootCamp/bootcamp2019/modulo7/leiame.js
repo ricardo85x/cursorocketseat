@@ -12,6 +12,10 @@ const doc = {
             nome: 'react-icons',
             desc: 'pacote de icons ',
         },
+        {
+            nome: 'polished',
+            desc: 'tratar cores',
+        },
     ],
 };
 
