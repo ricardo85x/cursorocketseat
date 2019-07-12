@@ -11,7 +11,6 @@ export default createGlobalStyle`
         padding: 0;
         outline: 0;
         box-sizing: border-box;
-
     }
 
     body {
@@ -22,7 +21,6 @@ export default createGlobalStyle`
     body, input, button {
         font: 14px Roboto, sans-serif;
     }
-
 
     #root {
         max-width: 1020px;

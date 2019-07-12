@@ -8,6 +8,10 @@ const doc = {
             nome: 'styled-components',
             desc: 'lib de estilo',
         },
+        {
+            nome: 'react-icons',
+            desc: 'pacote de icons ',
+        },
     ],
 };
 
