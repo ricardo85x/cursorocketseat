@@ -1,114 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { ProductList } from './styles';
 
-export default function Home() {
-    return (
-        <ProductList>
-            <li>
-                <img
-                    alt="tenis"
-                    src="//static.netshoes.com.br/produtos/tenis-vr-caminhada-confortavel-detalhes-couro-masculino/04/E74-0413-304/E74-0413-304_zoom1.jpg"
-                />
-                <strong>
-                    Tenis Vegano com um texto gigante nao sei para que tanta
-                    descricao
-                </strong>
-                <span>R$129,99</span>
+import api from '../../services/api';
+import { formatPrice } from '../../util/format';
 
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="$fff" /> 3
-                    </div>
+export default class Home extends Component {
+    state = {
+        products: [],
+    };
 
-                    <span>Adicionar ao Carrinho</span>
-                </button>
-            </li>
+    async componentDidMount() {
+        const response = await api.get('/products');
 
-            <li>
-                <img
-                    alt="tenis"
-                    src="//static.netshoes.com.br/produtos/tenis-vr-caminhada-confortavel-detalhes-couro-masculino/04/E74-0413-304/E74-0413-304_zoom1.jpg"
-                />
-                <strong>Tenis Vegano</strong>
-                <span>R$129,99</span>
+        const products = response.data.map(product => ({
+            ...product,
+            priceFormatted: formatPrice(product.price),
+        }));
 
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="$fff" /> 3
-                    </div>
+        console.log(response.data);
 
-                    <span>Adicionar ao Carrinho</span>
-                </button>
-            </li>
+        this.setState({ products });
+    }
 
-            <li>
-                <img
-                    alt="tenis"
-                    src="//static.netshoes.com.br/produtos/tenis-vr-caminhada-confortavel-detalhes-couro-masculino/04/E74-0413-304/E74-0413-304_zoom1.jpg"
-                />
-                <strong>Tenis Vegano</strong>
-                <span>R$129,99</span>
+    render() {
+        const { products } = this.state;
+        return (
+            <ProductList>
+                {products.map(product => (
+                    <li key={String(product.id)}>
+                        <img alt={product.title} src={product.image} />
+                        <strong>{product.title}</strong>
+                        <span>{product.priceFormatted}</span>
 
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="$fff" /> 3
-                    </div>
+                        <button type="button">
+                            <div>
+                                <MdAddShoppingCart size={16} color="$fff" /> 3
+                            </div>
 
-                    <span>Adicionar ao Carrinho</span>
-                </button>
-            </li>
-
-            <li>
-                <img
-                    alt="tenis"
-                    src="//static.netshoes.com.br/produtos/tenis-vr-caminhada-confortavel-detalhes-couro-masculino/04/E74-0413-304/E74-0413-304_zoom1.jpg"
-                />
-                <strong>Tenis Vegano</strong>
-                <span>R$129,99</span>
-
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="$fff" /> 3
-                    </div>
-
-                    <span>Adicionar ao Carrinho</span>
-                </button>
-            </li>
-
-            <li>
-                <img
-                    alt="tenis"
-                    src="//static.netshoes.com.br/produtos/tenis-vr-caminhada-confortavel-detalhes-couro-masculino/04/E74-0413-304/E74-0413-304_zoom1.jpg"
-                />
-                <strong>Tenis Vegano</strong>
-                <span>R$129,99</span>
-
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="$fff" /> 3
-                    </div>
-
-                    <span>Adicionar ao Carrinho</span>
-                </button>
-            </li>
-
-            <li>
-                <img
-                    alt="tenis"
-                    src="//static.netshoes.com.br/produtos/tenis-vr-caminhada-confortavel-detalhes-couro-masculino/04/E74-0413-304/E74-0413-304_zoom1.jpg"
-                />
-                <strong>Tenis Vegano</strong>
-                <span>R$129,99</span>
-
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="$fff" /> 3
-                    </div>
-
-                    <span>Adicionar ao Carrinho</span>
-                </button>
-            </li>
-        </ProductList>
-    );
+                            <span>Adicionar ao Carrinho</span>
+                        </button>
+                    </li>
+                ))}
+            </ProductList>
+        );
+    }
 }
