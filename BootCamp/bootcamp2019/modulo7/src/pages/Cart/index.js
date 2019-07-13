@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     MdRemoveCircleOutline,
     MdAddCircleOutline,
@@ -6,7 +7,7 @@ import {
 } from 'react-icons/md';
 import { Container, ProductTable, Total } from './styles';
 
-export default function Cart() {
+function Cart({ cart }) {
     return (
         <Container>
             <ProductTable>
@@ -21,40 +22,43 @@ export default function Cart() {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>
-                            <img
-                                src="//static.netshoes.com.br/produtos/tenis-vr-caminhada-confortavel-detalhes-couro-masculino/04/E74-0413-304/E74-0413-304_zoom1.jpg"
-                                alt="Tenis"
-                            />
-                        </td>
-                        <td>
-                            <strong>Le tenis 1</strong>
-                            <span>$129,99</span>
-                        </td>
-                        <td>
-                            <div>
-                                {/* adicionado div porque td nao pode ter display flex */}
-                                <button type="button">
-                                    <MdRemoveCircleOutline size={20} />
-                                </button>
-                                <input type="number" readOnly value={1} />
-                                <button type="button">
-                                    <MdAddCircleOutline size={20} />
-                                </button>
-                            </div>
-                        </td>
+                    {cart.map(produto => (
+                        <tr key={String(produto.id)}>
+                            <td>
+                                <img src={produto.image} alt={produto.title} />
+                            </td>
+                            <td>
+                                <strong>{produto.title}</strong>
+                                <span>{produto.price}</span>
+                            </td>
+                            <td>
+                                <div>
+                                    {/* adicionado div porque td nao pode ter display flex */}
+                                    <button type="button">
+                                        <MdRemoveCircleOutline size={20} />
+                                    </button>
+                                    <input
+                                        type="number"
+                                        readOnly
+                                        value={produto.amount}
+                                    />
+                                    <button type="button">
+                                        <MdAddCircleOutline size={20} />
+                                    </button>
+                                </div>
+                            </td>
 
-                        <td>
-                            <strong>R$198,00</strong>
-                        </td>
+                            <td>
+                                <strong>{produto.priceFormatted}</strong>
+                            </td>
 
-                        <td>
-                            <button type="button">
-                                <MdDelete size={20} />
-                            </button>
-                        </td>
-                    </tr>
+                            <td>
+                                <button type="button">
+                                    <MdDelete size={20} />
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </ProductTable>
 
@@ -69,3 +73,9 @@ export default function Cart() {
         </Container>
     );
 }
+
+const mapStateToProps = state => ({
+    cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Cart);
