@@ -37,6 +37,11 @@ const doc = {
             name: 'reactotron-react-js e reactotron-redux',
             desc: 'o nome ja diz tudo',
         },
+        {
+            name: 'immer',
+            desc:
+                'permite trabalhar com objetos imutaveis modificando os valores e atualizando eles',
+        },
     ],
 };
 
