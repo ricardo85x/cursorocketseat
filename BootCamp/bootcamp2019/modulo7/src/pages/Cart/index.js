@@ -10,7 +10,9 @@ import {
 import * as CartAction from '../../store/modules/cart/actions';
 import { Container, ProductTable, Total } from './styles';
 
-function Cart({ cart, removeFromCart }) {
+import { formatPrice } from '../../util/format';
+
+function Cart({ cart, removeFromCart, updateAmount, total }) {
     // sempre vai ter o dispatch com o redux
     return (
         <Container>
@@ -39,7 +41,15 @@ function Cart({ cart, removeFromCart }) {
                                 <div>
                                     {/* adicionado div porque td nao pode ter display flex */}
                                     <button type="button">
-                                        <MdRemoveCircleOutline size={20} />
+                                        <MdRemoveCircleOutline
+                                            size={20}
+                                            onClick={() =>
+                                                updateAmount(
+                                                    produto.id,
+                                                    'REMOVE'
+                                                )
+                                            }
+                                        />
                                     </button>
                                     <input
                                         type="number"
@@ -47,13 +57,18 @@ function Cart({ cart, removeFromCart }) {
                                         value={produto.amount}
                                     />
                                     <button type="button">
-                                        <MdAddCircleOutline size={20} />
+                                        <MdAddCircleOutline
+                                            size={20}
+                                            onClick={() =>
+                                                updateAmount(produto.id, 'ADD')
+                                            }
+                                        />
                                     </button>
                                 </div>
                             </td>
 
                             <td>
-                                <strong>{produto.priceFormatted}</strong>
+                                <strong>{produto.subtotal}</strong>
                             </td>
 
                             <td>
@@ -74,7 +89,7 @@ function Cart({ cart, removeFromCart }) {
 
                 <Total>
                     <span>TOTAL </span>
-                    <strong>R$99,00</strong>
+                    <strong>{total}</strong>
                 </Total>
             </footer>
         </Container>
@@ -82,7 +97,15 @@ function Cart({ cart, removeFromCart }) {
 }
 
 const mapStateToProps = state => ({
-    cart: state.cart,
+    cart: state.cart.map(product => ({
+        ...product,
+        subtotal: formatPrice(product.price * product.amount),
+    })),
+    total: formatPrice(
+        state.cart.reduce((total, product) => {
+            return total + product.amount * product.price;
+        }, 0)
+    ),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartAction, dispatch);
