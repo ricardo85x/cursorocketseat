@@ -25,6 +25,10 @@ const doc = {
             name: 'axios',
             desc: 'tratar requests ',
         },
+        {
+            name: 'redux e react-redux',
+            desc: 'google it please...',
+        },
     ],
 };
 
