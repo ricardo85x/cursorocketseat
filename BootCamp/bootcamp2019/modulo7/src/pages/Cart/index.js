@@ -7,7 +7,8 @@ import {
 } from 'react-icons/md';
 import { Container, ProductTable, Total } from './styles';
 
-function Cart({ cart }) {
+function Cart({ cart, dispatch }) {
+    // sempre vai ter o dispatch com o redux
     return (
         <Container>
             <ProductTable>
@@ -53,7 +54,15 @@ function Cart({ cart }) {
                             </td>
 
                             <td>
-                                <button type="button">
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        dispatch({
+                                            type: 'REMOVE_FROM_CART',
+                                            id: produto.id,
+                                        })
+                                    }
+                                >
                                     <MdDelete size={20} />
                                 </button>
                             </td>
