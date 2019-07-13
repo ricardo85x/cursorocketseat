@@ -27,6 +27,7 @@ export default createGlobalStyle`
         margin: 0 auto;
         padding: 0 20px 50px;
         --my-color: #7159c1;
+        --my-color-dark: #5b47a1;
     }
 
     button {
