@@ -27,6 +27,7 @@ module.exports = {
         { extensions: [ '.jsx', '.js' ] } // da warning apenas se p codigo react nao estiver dentro de jsx ou js
     ],
     'import/prefer-default-export': 'off',
+    "no-console": ["error", { allow: ["tron"]}]
 
   },
 };

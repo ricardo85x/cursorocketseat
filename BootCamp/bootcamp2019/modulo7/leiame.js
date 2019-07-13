@@ -29,6 +29,14 @@ const doc = {
             name: 'redux e react-redux',
             desc: 'google it please...',
         },
+        {
+            name: 'propTypes',
+            desc: 'google it',
+        },
+        {
+            name: 'reactotron-react-js e reactotron-redux',
+            desc: 'o nome ja diz tudo',
+        },
     ],
 };
 
