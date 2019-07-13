@@ -16,6 +16,15 @@ const doc = {
             nome: 'polished',
             desc: 'tratar cores',
         },
+        {
+            nome: 'json-server',
+            desc: 'modulo que cria uma api fake apartir de um arquivo de json',
+            tipo: 'global, não instale no seu projeto...',
+        },
+        {
+            name: 'axios',
+            desc: 'tratar requests ',
+        },
     ],
 };
 
