@@ -12,9 +12,10 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { formatPrice } from '../../util/format';
 
 class Home extends Component {
-    // static propTypes = {
-    //     dispatch: PropTypes.func.isRequired,
-    // };
+    static propTypes = {
+        addToCartRequest: PropTypes.func.isRequired,
+        amount: PropTypes.func.isRequired,
+    };
 
     state = {
         products: [],
@@ -28,15 +29,13 @@ class Home extends Component {
             priceFormatted: formatPrice(product.price),
         }));
 
-        console.log(response.data);
-
         this.setState({ products });
     }
 
-    handleAddProduct = product => {
-        const { addToCart } = this.props;
+    handleAddProduct = id => {
+        const { addToCartRequest } = this.props;
 
-        addToCart(product);
+        addToCartRequest(id);
     };
 
     render() {
@@ -52,7 +51,7 @@ class Home extends Component {
 
                         <button
                             type="button"
-                            onClick={() => this.handleAddProduct(product)}
+                            onClick={() => this.handleAddProduct(product.id)}
                         >
                             <div>
                                 <MdAddShoppingCart size={16} color="$fff" />

@@ -1,4 +1,4 @@
-const doc = {
+export const doc = {
     modulos: [
         {
             nome: 'react-router-dom',
@@ -42,7 +42,9 @@ const doc = {
             desc:
                 'permite trabalhar com objetos imutaveis modificando os valores e atualizando eles',
         },
+        {
+            name: 'redux-saga',
+            desc: 'permite o usuado de middleware nas actions do redux',
+        },
     ],
 };
-
-console.log(doc);
