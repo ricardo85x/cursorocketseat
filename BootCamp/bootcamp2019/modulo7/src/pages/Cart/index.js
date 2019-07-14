@@ -13,7 +13,7 @@ import { Container, ProductTable, Total } from './styles';
 
 import { formatPrice } from '../../util/format';
 
-function Cart({ cart, removeFromCart, updateAmount, total }) {
+function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
     // sempre vai ter o dispatch com o redux
     return (
         <Container>
@@ -45,7 +45,7 @@ function Cart({ cart, removeFromCart, updateAmount, total }) {
                                         <MdRemoveCircleOutline
                                             size={20}
                                             onClick={() =>
-                                                updateAmount(
+                                                updateAmountRequest(
                                                     produto.id,
                                                     'REMOVE'
                                                 )
@@ -61,7 +61,10 @@ function Cart({ cart, removeFromCart, updateAmount, total }) {
                                         <MdAddCircleOutline
                                             size={20}
                                             onClick={() =>
-                                                updateAmount(produto.id, 'ADD')
+                                                updateAmountRequest(
+                                                    produto.id,
+                                                    'ADD'
+                                                )
                                             }
                                         />
                                     </button>
@@ -100,7 +103,7 @@ function Cart({ cart, removeFromCart, updateAmount, total }) {
 Cart.propTypes = {
     cart: PropTypes.shape.isRequired,
     removeFromCart: PropTypes.func.isRequired,
-    updateAmount: PropTypes.func.isRequired,
+    updateAmountRequest: PropTypes.func.isRequired,
     total: PropTypes.string.isRequired,
 };
 

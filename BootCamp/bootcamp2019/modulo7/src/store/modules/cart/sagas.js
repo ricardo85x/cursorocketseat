@@ -12,7 +12,7 @@ import { formatPrice } from '../../../util/format';
 
 import api from '../../../services/api';
 
-import { addToCartSuccess, updateAmount } from './actions';
+import { addToCartSuccess, updateAmountSuccess } from './actions';
 
 function* addToCart({ id }) {
     /*
@@ -41,7 +41,7 @@ function* addToCart({ id }) {
     }
 
     if (productExistts) {
-        yield put(updateAmount(id, 'ADD'));
+        yield put(updateAmountSuccess(id, 'ADD'));
     } else {
         const response = yield call(api.get, `/products/${id}`);
 
@@ -51,8 +51,37 @@ function* addToCart({ id }) {
             priceFormatted: formatPrice(response.data.price),
         };
 
+        toast.success(`${data.title} adicionando ao carrinho`);
+
         yield put(addToCartSuccess(data));
     }
 }
 
-export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
+function* updateAmount({ id, action }) {
+    const product = yield select(state => state.cart.find(p => p.id === id));
+
+    const response = yield call(api.get, `/stock/${id}`);
+
+    const stockAmount = response.data.amount;
+
+    console.tron.warn(`total: ${stockAmount} <  atual: ${product.amount}`);
+
+    if (action === 'ADD') {
+        const { amount } = product;
+
+        if (amount + 1 > stockAmount) {
+            toast.error('Não temos o produto no estoque');
+        } else {
+            yield put(updateAmountSuccess(id, action));
+        }
+    } else {
+        console.tron.warn('removendo ');
+
+        yield put(updateAmountSuccess(id, action));
+    }
+}
+
+export default all([
+    takeLatest('@cart/ADD_REQUEST', addToCart),
+    takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
+]);
