@@ -12,9 +12,9 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { formatPrice } from '../../util/format';
 
 class Home extends Component {
-    static propTypes = {
-        dispatch: PropTypes.func.isRequired,
-    };
+    // static propTypes = {
+    //     dispatch: PropTypes.func.isRequired,
+    // };
 
     state = {
         products: [],
@@ -41,6 +41,7 @@ class Home extends Component {
 
     render() {
         const { products } = this.state;
+        const { amount } = this.props;
         return (
             <ProductList>
                 {products.map(product => (
@@ -55,7 +56,7 @@ class Home extends Component {
                         >
                             <div>
                                 <MdAddShoppingCart size={16} color="$fff" />
-                                {product.amount}
+                                {amount(product.id)}
                             </div>
 
                             <span>Adicionar ao Carrinho</span>
@@ -70,7 +71,14 @@ class Home extends Component {
 const mapDispatchToProps = dispatch =>
     bindActionCreators(CartActions, dispatch);
 
+const mapStateToProps = state => ({
+    amount: prodID => {
+        const product = state.cart.find(item => item.id === prodID);
+        return product ? product.amount : 0;
+    },
+});
+
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Home);
