@@ -46,5 +46,9 @@ export const doc = {
             name: 'redux-saga',
             desc: 'permite o usuado de middleware nas actions do redux',
         },
+        {
+            name: 'reactotron-redux-saga',
+            desc: 'ajuda a debugar o redux saga com o reactotron',
+        },
     ],
 };
