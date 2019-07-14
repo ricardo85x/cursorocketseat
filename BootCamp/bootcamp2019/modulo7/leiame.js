@@ -54,5 +54,9 @@ export const doc = {
             name: 'react-toastify',
             desc: 'exibe mensagens de aviso/warning/erro para o usuario',
         },
+        {
+            name: 'history',
+            desc: 'controla a history do navegador que neste caso são as rotas',
+        },
     ],
 };
