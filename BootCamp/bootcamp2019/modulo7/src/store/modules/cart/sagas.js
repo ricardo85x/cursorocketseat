@@ -19,9 +19,24 @@ function* addToCart({ id }) {
         - como estamos usando o *, nao podemos chamar o await, logo usamos o yield call
     */
 
+    const stock = yield call(api.get, `/stock/${id}`);
+
+    const {
+        data: { amount: stockAmount },
+    } = stock;
+
     const productExistts = yield select(state =>
         state.cart.find(p => p.id === id)
     );
+
+    const currentAmount = productExistts ? productExistts.amount : 0;
+
+    const amount = currentAmount + 1;
+
+    if (amount > stockAmount) {
+        console.tron.warn('Erro nao temos produtos no estoque');
+        return;
+    }
 
     if (productExistts) {
         yield put(updateAmount(id, 'ADD'));
