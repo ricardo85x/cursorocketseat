@@ -7,6 +7,7 @@ import { call, select, put, all, takeLatest } from 'redux-saga/effects';
     - select busca informacao dentro do stato
 */
 
+import { toast } from 'react-toastify';
 import { formatPrice } from '../../../util/format';
 
 import api from '../../../services/api';
@@ -35,6 +36,7 @@ function* addToCart({ id }) {
 
     if (amount > stockAmount) {
         console.tron.warn('Erro nao temos produtos no estoque');
+        toast.error('Não temos o produto no estoque');
         return;
     }
 

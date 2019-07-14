@@ -50,5 +50,9 @@ export const doc = {
             name: 'reactotron-redux-saga',
             desc: 'ajuda a debugar o redux saga com o reactotron',
         },
+        {
+            name: 'react-toastify',
+            desc: 'exibe mensagens de aviso/warning/erro para o usuario',
+        },
     ],
 };
