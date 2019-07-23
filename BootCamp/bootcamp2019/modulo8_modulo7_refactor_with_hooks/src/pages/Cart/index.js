@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import {
     MdRemoveCircleOutline,
@@ -13,8 +13,28 @@ import { Container, ProductTable, Total } from './styles';
 
 import { formatPrice } from '../../util/format';
 
-function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
+export default function Cart() {
+    const total = useSelector(state =>
+        formatPrice(
+            state.cart.reduce((total, product) => {
+                return total + product.amount * product.price;
+            }, 0)
+        )
+    );
+
+    const cart = useSelector(state =>
+        state.cart.map(product => ({
+            ...product,
+            subtotal: formatPrice(product.price * product.amount),
+        }))
+    );
+
+    const dispatch = useDispatch();
+
     // sempre vai ter o dispatch com o redux
+
+    // cart, removeFromCart, updateAmountRequest, total
+
     return (
         <Container>
             <ProductTable>
@@ -45,9 +65,11 @@ function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
                                         <MdRemoveCircleOutline
                                             size={20}
                                             onClick={() =>
-                                                updateAmountRequest(
-                                                    produto.id,
-                                                    'REMOVE'
+                                                dispatch(
+                                                    CartAction.updateAmountRequest(
+                                                        produto.id,
+                                                        'REMOVE'
+                                                    )
                                                 )
                                             }
                                         />
@@ -61,9 +83,11 @@ function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
                                         <MdAddCircleOutline
                                             size={20}
                                             onClick={() =>
-                                                updateAmountRequest(
-                                                    produto.id,
-                                                    'ADD'
+                                                dispatch(
+                                                    CartAction.updateAmountRequest(
+                                                        produto.id,
+                                                        'ADD'
+                                                    )
                                                 )
                                             }
                                         />
@@ -78,7 +102,13 @@ function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
                             <td>
                                 <button
                                     type="button"
-                                    onClick={() => removeFromCart(produto.id)}
+                                    onClick={() =>
+                                        dispatch(
+                                            CartAction.removeFromCart(
+                                                produto.id
+                                            )
+                                        )
+                                    }
                                 >
                                     <MdDelete size={20} />
                                 </button>
@@ -100,28 +130,28 @@ function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
     );
 }
 
-Cart.propTypes = {
-    cart: PropTypes.shape.isRequired,
-    removeFromCart: PropTypes.func.isRequired,
-    updateAmountRequest: PropTypes.func.isRequired,
-    total: PropTypes.string.isRequired,
-};
+// Cart.propTypes = {
+//     cart: PropTypes.shape.isRequired,
+//     removeFromCart: PropTypes.func.isRequired,
+//     updateAmountRequest: PropTypes.func.isRequired,
+//     total: PropTypes.string.isRequired,
+// };
 
-const mapStateToProps = state => ({
-    cart: state.cart.map(product => ({
-        ...product,
-        subtotal: formatPrice(product.price * product.amount),
-    })),
-    total: formatPrice(
-        state.cart.reduce((total, product) => {
-            return total + product.amount * product.price;
-        }, 0)
-    ),
-});
+// const mapStateToProps = state => ({
+//     cart: state.cart.map(product => ({
+//         ...product,
+//         subtotal: formatPrice(product.price * product.amount),
+//     })),
+//     total: formatPrice(
+//         state.cart.reduce((total, product) => {
+//             return total + product.amount * product.price;
+//         }, 0)
+//     ),
+// });
 
-const mapDispatchToProps = dispatch => bindActionCreators(CartAction, dispatch);
+// const mapDispatchToProps = dispatch => bindActionCreators(CartAction, dispatch);
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Cart);
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Cart);

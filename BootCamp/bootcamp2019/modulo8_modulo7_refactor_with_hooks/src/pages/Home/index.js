@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { ProductList } from './styles';
 
@@ -11,7 +10,16 @@ import * as CartActions from '../../store/modules/cart/actions';
 
 import { formatPrice } from '../../util/format';
 
-function Home({ amount, addToCartRequest }) {
+export default function Home() {
+    const amount = useSelector(state => ({
+        amount: prodID => {
+            const product = state.cart.find(item => item.id === prodID);
+            return product ? product.amount : 0;
+        },
+    }));
+
+    const dispatch = useDispatch();
+
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -28,9 +36,7 @@ function Home({ amount, addToCartRequest }) {
     }, []);
 
     function handleAddProduct(id) {
-        // const { addToCartRequest } = this.props;
-
-        addToCartRequest(id);
+        dispatch(CartActions.addToCartRequest(id));
     }
 
     return (
@@ -47,7 +53,7 @@ function Home({ amount, addToCartRequest }) {
                     >
                         <div>
                             <MdAddShoppingCart size={16} color="$fff" />
-                            {amount(product.id)}
+                            {amount.amount(product.id)}
                         </div>
 
                         <span>Adicionar ao Carrinho</span>
@@ -63,17 +69,7 @@ Home.propTypes = {
     amount: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(CartActions, dispatch);
-
-const mapStateToProps = state => ({
-    amount: prodID => {
-        const product = state.cart.find(item => item.id === prodID);
-        return product ? product.amount : 0;
-    },
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home);
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Home);
