@@ -25,5 +25,13 @@ export const doc = {
         `,
       },
     },
+    {
+      name: 'useMemo',
+      desc: `
+        usado para rodar uma função apenas quando um 
+          state indicado for alterado, deixando a aplicação
+          mais leve
+      `,
+    },
   ],
 };
