@@ -33,5 +33,15 @@ export const doc = {
           mais leve
       `,
     },
+    {
+      name: 'useCallback',
+      desc: `
+        igual o useMemo, mas no lugar de criar uma variavel, 
+          ele cria uma função, util para deixar codigo mais leve
+          pois se não ele iria recriar a mesma função sempre que
+          que algum state é alterado, usando o useCallback, vc indica
+          qual state ele deve ouvir, para recriar a função
+      `,
+    },
   ],
 };
