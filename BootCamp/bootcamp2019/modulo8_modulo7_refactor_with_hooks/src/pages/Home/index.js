@@ -12,15 +12,6 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { formatPrice } from '../../util/format';
 
 function Home({ amount, addToCartRequest }) {
-    // static propTypes = {
-    //     addToCartRequest: PropTypes.func.isRequired,
-    //     amount: PropTypes.func.isRequired,
-    // };
-
-    // state = {
-    //     products: [],
-    // };
-
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -35,17 +26,6 @@ function Home({ amount, addToCartRequest }) {
         }
         loadProducts();
     }, []);
-
-    // async componentDidMount() {
-    //     const response = await api.get('/products');
-
-    //     const products = response.data.map(product => ({
-    //         ...product,
-    //         priceFormatted: formatPrice(product.price),
-    //     }));
-
-    //     this.setState({ products });
-    // }
 
     function handleAddProduct(id) {
         // const { addToCartRequest } = this.props;
@@ -77,6 +57,11 @@ function Home({ amount, addToCartRequest }) {
         </ProductList>
     );
 }
+
+Home.propTypes = {
+    addToCartRequest: PropTypes.func.isRequired,
+    amount: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(CartActions, dispatch);
