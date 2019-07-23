@@ -8,4 +8,22 @@ export const doc = {
       ps: adicionar no .eslintrc
     `,
   },
+  hooks: [
+    {
+      name: 'useState',
+      desc: 'funciona como o state/setstate. Mas pode ser usando sem classe',
+    },
+    {
+      name: {
+        name: 'useEffect',
+        desc: `
+          - fuunciona como o componentDidMount/Update, etc
+          - se usado com o segundo argumento vazio ele roda apenas 1x
+          - se colocar um return com uma funcao no final, ele age como um didUnmount,
+              util para remover o eventListener quando o componente deixa
+              de existir
+        `,
+      },
+    },
+  ],
 };
