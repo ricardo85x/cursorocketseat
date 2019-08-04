@@ -19,5 +19,10 @@ export default {
         "para o eslint não reclamar do ~ no import dos aruivos com o plugin root-import",
       devel: true
     }
+  ],
+  redux: [
+    {
+      nome: "nova pasta store"
+    }
   ]
 };
