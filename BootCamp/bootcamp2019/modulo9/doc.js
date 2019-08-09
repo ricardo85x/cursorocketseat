@@ -18,11 +18,23 @@ export default {
       desc:
         "para o eslint não reclamar do ~ no import dos aruivos com o plugin root-import",
       devel: true
+    },
+    {
+      name: "redux-persist",
+      desc:
+        "armazenar dados do redux no local storage ou outro storage configurado, magicamente"
     }
   ],
   redux: [
     {
       nome: "nova pasta store"
+    },
+    {
+      nome: "modulos",
+      desc: {
+        nome:
+          "redux redux-saga react-redux reactotron-redux reactotron-redux-saga immer "
+      }
     }
   ]
 };
