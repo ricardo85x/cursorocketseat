@@ -36,5 +36,13 @@ export default {
           "redux redux-saga react-redux reactotron-redux reactotron-redux-saga immer "
       }
     }
-  ]
+  ],
+  outros: {
+    sites: [
+      {
+        name: "http://avatars.adorable.io/",
+        desc: "para pegar uma imagem para testar no site"
+      }
+    ]
+  }
 };
