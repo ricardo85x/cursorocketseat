@@ -3,32 +3,30 @@ import { takeLatest, call, put, all } from "redux-saga/effects";
 import history from "~/services/history";
 import api from "~/services/api";
 
-import { signInSuccess } from "./actions";
+import { signInSuccess, signFailure } from "./actions";
 
 export function* signIn({ payload }) {
-  const { email, password } = payload;
+  try {
+    const { email, password } = payload;
+    const response = yield call(api.post, "/sessions", {
+      email,
+      password
+    });
+    const { user, token } = response.data;
 
-  const response = yield call(api.post, "/sessions", {
-    email,
-    password
-  });
+    if (!user.provider) {
+      console.tron.error("usuario não é prestador de serviço");
+      return;
+    }
 
-  console.tron.log(response);
+    yield put(signInSuccess(token, user));
 
-  const { user, token } = response.data;
+    console.tron.log("papacapim");
 
-  if (!user.provider) {
-    console.tron.error("usuario não é prestador de serviço");
-    return;
+    history.push("/dashboard");
+  } catch (e) {
+    yield put(signFailure());
   }
-
-  console.tron.log("tudo numa boa");
-
-  yield put(signInSuccess(token, user));
-
-  console.tron.log("papacapim");
-
-  history.push("/dashboard");
 }
 
 export default all([takeLatest("@auth/SIGN_IN_REQUEST", signIn)]);
