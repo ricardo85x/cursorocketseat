@@ -23,6 +23,10 @@ export default {
       name: "redux-persist",
       desc:
         "armazenar dados do redux no local storage ou outro storage configurado, magicamente"
+    },
+    {
+      name: "react-perfect-scrollbar",
+      desc: "facilita o uso da scrollbar"
     }
   ],
   redux: [
@@ -41,7 +45,7 @@ export default {
     sites: [
       {
         name: "http://avatars.adorable.io/",
-        desc: "para pegar uma imagem para testar no site"
+        desc: "para criar elementos scrollbar"
       }
     ]
   }
