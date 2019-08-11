@@ -27,6 +27,9 @@ export default {
     {
       name: "react-perfect-scrollbar",
       desc: "facilita o uso da scrollbar"
+    },
+    {
+      name: "date-fns-tz"
     }
   ],
   redux: [
