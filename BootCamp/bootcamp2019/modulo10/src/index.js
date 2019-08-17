@@ -1,13 +1,8 @@
 import React from 'react';
 import {View, Text, StatusBar} from 'react-native';
 
-const App = () => (
-    <>
-        <StatusBar barStyle="dark-content" />
-        <View>
-            <Text>Ola mundo cruel </Text>
-        </View>
-    </>
-);
+import Routes from '~/routes';
+
+const App = () => <Routes />;
 
 export default App;
