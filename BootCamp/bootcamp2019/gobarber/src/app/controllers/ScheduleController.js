@@ -40,6 +40,8 @@ class ScheduleController {
       order: ['date'],
     });
 
+    console.log('vamos parar por aqui', req.userID, startDay, endDay);
+
     return res.json(appointments);
   }
 }

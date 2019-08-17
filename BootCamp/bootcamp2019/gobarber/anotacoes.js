@@ -14,9 +14,9 @@ export default {
     {
       nome: 'sequelize',
       migrations: [
-        'yarn sequelize migrate:create --name=create-users',
-        'yarn sequelize migrate:undo', // desmerdify a ultima
-        'yarn sequelize migrate:undo:all', // desmerdify tudo
+        'yarn sequelize migration:create --name=create-users',
+        'yarn sequelize migration:undo', // desmerdify a ultima
+        'yarn sequelize migration:undo:all', // desmerdify tudo
       ],
       dicas: [
         {
