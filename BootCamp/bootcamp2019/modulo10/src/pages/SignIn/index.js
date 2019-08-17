@@ -2,12 +2,16 @@ import React from 'react';
 
 import {Text} from 'react-native';
 
+import Background from '~/components/Background';
+
 import {Container} from './styles';
 
-export default function SignUp() {
+export default function SignIn() {
     return (
-        <Container>
-            <Text>Ola SignIn</Text>
-        </Container>
+        <Background>
+            <Container>
+                <Text>Ola SignIn</Text>
+            </Container>
+        </Background>
     );
 }
