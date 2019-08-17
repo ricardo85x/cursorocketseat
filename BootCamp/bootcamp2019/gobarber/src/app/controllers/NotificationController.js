@@ -14,6 +14,15 @@ class NotificationController {
       return res.status(401).json({ error: 'only for providers, sorry' });
     }
 
+    const mother = await await Notification.find({
+      user: req.userID,
+    })
+      .sort({
+        createdAt: 'desc',
+      })
+      .limit(20);
+    console.log('mother!', mother, req.userID);
+
     const notifications = await Notification.find({
       user: req.userID,
     })

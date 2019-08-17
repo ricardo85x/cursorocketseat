@@ -139,10 +139,12 @@ class AppointmentController {
       }
     );
 
-    await Notification.create({
+    const notificacao = await Notification.create({
       content: `Novo agendamento de ${user.name} para o ${formattedDate}`,
       user: provider_id,
     });
+
+    console.log('notificacao', notificacao);
 
     return res.json(appointment);
   }
