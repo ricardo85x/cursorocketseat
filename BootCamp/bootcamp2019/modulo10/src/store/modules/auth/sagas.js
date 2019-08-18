@@ -1,4 +1,4 @@
-import {takeLatest, call, put, all} from 'redux-saga/effects';
+import {takeLatest, call, put, all, delay} from 'redux-saga/effects';
 // import {toast} from 'react-toastify';
 import {Alert} from 'react-native';
 
@@ -25,6 +25,8 @@ export function* signIn({payload}) {
         }
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
+
+        yield delay(3);
         yield put(signInSuccess(token, user));
 
         console.tron.log('papacapim');
@@ -40,7 +42,11 @@ export function* signUp({payload}) {
     try {
         const {name, email, password} = payload;
 
-        yield call(api.post, '/users', {name, email, password, provider: true});
+        yield call(api.post, '/users', {
+            name,
+            email,
+            password,
+        });
 
         // history.push('/');
     } catch (e) {
