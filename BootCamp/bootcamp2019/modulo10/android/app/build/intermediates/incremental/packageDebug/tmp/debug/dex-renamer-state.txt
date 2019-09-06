@@ -1,0 +1,4 @@
+#Sat Aug 17 21:01:52 BRT 2019
+base.0=/home/ricardo/code/cursorocketseat/BootCamp/bootcamp2019/modulo10/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
