@@ -2,10 +2,11 @@
 import React from 'react'
 import { render, fireEvent, cleanup } from '@testing-library/react'
 
-import TechList from '~/components/TechList'
+import TechList from '~/components/TechList_Aula1-4'
 
 describe('TechList component', () => {
 
+    // Aula 1 - 4
     beforeEach(() => {
       localStorage.clear()
     })

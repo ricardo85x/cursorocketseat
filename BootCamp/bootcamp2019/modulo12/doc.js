@@ -25,7 +25,9 @@ export default {
         {
             name: 'jest-localstorage-mock',
             dev: true,
-            desc: 'mock do localstorage, sem isto não podemos usar o verificar se a funcao localstorage.set foi chamada com x argumentos'
+            desc: `mock do localstorage, sem isto não podemos usar o 
+                   verificar se a funcao localstorage.set foi chamada 
+                   com x argumentos`
         }
     ]   
 }
