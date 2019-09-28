@@ -21,6 +21,11 @@ export default {
             name: "@types/jest",
             dev: true,
             desc: 'adicionar o auto complete nos testes'
+        },
+        {
+            name: 'jest-localstorage-mock',
+            dev: true,
+            desc: 'mock do localstorage, sem isto não podemos usar o verificar se a funcao localstorage.set foi chamada com x argumentos'
         }
     ]   
 }
