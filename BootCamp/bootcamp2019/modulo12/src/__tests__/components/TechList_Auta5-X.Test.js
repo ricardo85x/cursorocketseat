@@ -18,7 +18,7 @@ describe('TechList component', () => {
 
         const { getByTestId,  getByText, debug } = render(<TechList />)
 
-        debug()
+        // debug()
         expect(getByTestId('tech-list')).toContainElement(getByText('Node.js'))
         expect(getByTestId('tech-list')).toContainElement(getByText('ReactJS'))
 
@@ -34,7 +34,7 @@ describe('TechList component', () => {
         fireEvent.change(getByLabelText('Tech'), { target: { value: 'Node.js'}})
         fireEvent.submit(getByTestId('test-form'))
 
-        console.log(dispatch.mock.calls)
+        // console.log(dispatch.mock.calls)
         expect(dispatch).toHaveBeenCalledWith(addTech('Node.js'))
 
 
