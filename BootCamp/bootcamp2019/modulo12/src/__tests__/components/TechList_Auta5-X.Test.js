@@ -37,6 +37,7 @@ describe('TechList component', () => {
         console.log(dispatch.mock.calls)
         expect(dispatch).toHaveBeenCalledWith(addTech('Node.js'))
 
+
     })
  
 })
