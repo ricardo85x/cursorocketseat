@@ -4,6 +4,39 @@ export default {
             name: 'react-native-code-push',
             desc: 'atualizar o app mesmo depois de estar na loja',
         },
+        {
+            name:'react-native-onesignal',
+            desc: 'biblioteca do oneSignal para trabalhar com push notificaltion',
+            url: 'https://github.com/geektimecoil/react-native-onesignal',
+            url2: 'https://app.onesignal.com',
+            config: {
+                android: [
+                    {
+                        passo1: 'Editar o arquivo AndroidManifest.xml',
+                        dados: `adicionar no activity:
+                            android:launchMode="singleTop"    
+                        `
+                    },
+                    {
+                        passo2: `siga a instrucoes do site...`,
+                        url: 'https://documentation.onesignal.com/docs/react-native-sdk-setup'
+                    },
+                    {
+                        passo3: 'crie o app no opensignal e configure o firebase da googgle'
+                    }
+                ],
+                ios: [
+                    {
+                        passo1: `
+                            vai no site do onsignal e adicione o app
+                            na hora de pedir o certificado, adicione use o provisionator da one signal(google it) 
+                            e baixe o certificado p12
+                        `
+
+                    }
+                ]
+            }
+        }
     ],
     deploy: [
         {
