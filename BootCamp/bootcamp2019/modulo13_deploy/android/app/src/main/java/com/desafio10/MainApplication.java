@@ -36,6 +36,14 @@ public class MainApplication extends Application implements ReactApplication {
       List<ReactPackage> packages = new PackageList(this).getPackages();
       // Packages that cannot be autolinked yet can be added manually here, for example:
       // packages.add(new MyReactNativePackage());
+
+      for(ReactPackage reactPackage: packages) {
+        if (reactPackage instanceof CodePush) {
+          //packages.remove(reactPackage);
+          reactPackage = new CodePush(BuildConfig.CODEPUSH_KEY,getApplicationContext(),BuildConfig.DEBUG);
+        }
+      }
+      
       return packages;
     }
 
