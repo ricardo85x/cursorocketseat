@@ -1,8 +1,8 @@
 export default {
     modules: [
         {
-            name: 'react-native-linear-gradient',
-            desc: '',
+            name: 'react-native-code-push',
+            desc: 'atualizar o app mesmo depois de estar na loja',
         },
     ],
     deploy: [
@@ -97,6 +97,9 @@ export default {
                         'edite o applicationId'
                     ]
                 }
+            ],
+            outros: [
+               
             ]
         }
     ]

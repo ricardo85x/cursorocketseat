@@ -1,4 +1,6 @@
 import React from 'react';
+
+import CodePush from 'react-native-code-push'
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import {StatusBar} from 'react-native';
@@ -19,4 +21,8 @@ const Index = () => (
     </Provider>
 );
 
-export default Index;
+
+
+export default CodePush({
+    checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME
+})(Index);
