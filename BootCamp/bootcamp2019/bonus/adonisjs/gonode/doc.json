@@ -8,6 +8,12 @@
     },
     {
       "adonis serve --dev": "inicia o adonis server no modo dev"
+    },
+    {
+      "adonis migration:rollback": "volta o migration"
+    },
+    {
+      "adonis migration:run" : "roda a migration"
     }
   ]
 }
