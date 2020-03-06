@@ -1,0 +1,13 @@
+{
+  "command_line": [
+    {
+      "adonis make:controller User": "Cria o controller User"
+    },
+    {
+      "adonis route:list" : "lista as rotas do adonis"
+    },
+    {
+      "adonis serve --dev": "inicia o adonis server no modo dev"
+    }
+  ]
+}
