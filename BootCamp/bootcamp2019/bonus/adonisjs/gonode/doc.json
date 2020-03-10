@@ -14,6 +14,9 @@
     },
     {
       "adonis migration:run" : "roda a migration"
+    },
+    {
+      "adonis install @adonisjs/mail": "modulo de email do adonis"
     }
   ]
 }
