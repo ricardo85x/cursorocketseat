@@ -17,6 +17,9 @@
     },
     {
       "adonis install @adonisjs/mail": "modulo de email do adonis"
+    },
+    {
+      "adonis make:model File -m -c" : "Cria um model, a frag -m é para criar o migration, e a -c é para criar o controller"
     }
   ]
 }
